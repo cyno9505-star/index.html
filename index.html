@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Chill Class</title>
+  <style>
+    :root {
+      --bg: #eefaf1;
+      --bg-2: #f6fff9;
+      --panel: rgba(255,255,255,0.8);
+      --white: #ffffff;
+      --primary: #70c58d;
+      --primary-dark: #2a6a4a;
+      --primary-soft: #dff7e7;
+      --accent: #8ed9ae;
+      --accent-2: #c4f0cf;
+      --text: #1b3b2d;
+      --muted: #5d776d;
+      --line: rgba(24, 69, 50, 0.12);
+      --shadow: 0 20px 40px rgba(34, 84, 62, 0.12);
+      --glow: rgba(112, 197, 141, 0.18);
+      --hero: linear-gradient(135deg, #f2fff5 0%, #ecfdf6 100%);
+      --card: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(239,250,244,0.9));
+      --leaf: #7ad498;
+      --sun: #f2d79a;
+      --button-text: #ffffff;
+      --sea-glow: rgba(93, 193, 197, 0.16);
+    }
+
+    body[data-theme="sea"] {
+      --bg: #eaf7fb;
+      --bg-2: #f5fdff;
+      --panel: rgba(255,255,255,0.8);
+      --white: #ffffff;
+      --primary: #66b5d6;
+      --primary-dark: #234b62;
+      --primary-soft: #dfeefb;
+      --accent: #8ecde4;
+      --accent-2: #c1e3f0;
+      --text: #17354a;
+      --muted: #56768b;
+      --line: rgba(21, 61, 80, 0.12);
+      --shadow: 0 20px 40px rgba(28, 77, 104, 0.12);
+      --glow: rgba(102, 181, 214, 0.18);
+      --hero: linear-gradient(135deg, #effcff 0%, #f7fcff 100%);
+      --card: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(233,245,250,0.9));
+      --leaf: #85d7c4;
+      --sun: #f0d993;
+      --button-text: #ffffff;
+      --sea-glow: rgba(102, 181, 214, 0.16);
+    }
+
+    body[data-theme="windy"] {
+      --bg: #f5f7ef;
+      --bg-2: #fbfdf8;
+      --panel: rgba(255,255,255,0.8);
+      --white: #ffffff;
+      --primary: #9ecb7c;
+      --primary-dark: #405b33;
+      --primary-soft: #ebf7d8;
+      --accent: #bddf93;
+      --accent-2: #dfeec2;
+      --text: #233925;
+      --muted: #5d6d57;
+      --line: rgba(35, 57, 37, 0.12);
+      --shadow: 0 20px 40px rgba(82, 108, 62, 0.12);
+      --glow: rgba(158, 203, 124, 0.18);
+      --hero: linear-gradient(135deg, #f6fbf1 0%, #fbfff7 100%);
+      --card: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(242,249,233,0.9));
+      --leaf: #bddb8b;
+      --sun: #f4d995;
+      --button-text: #ffffff;
+      --sea-glow: rgba(158, 203, 124, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, var(--glow), transparent 23%),
+        radial-gradient(circle at 80% 20%, var(--sea-glow), transparent 22%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.18);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50% 0 50% 0;
+      background: rgba(255,255,255,0.28);
+      top: 7px;
+      left: 11px;
+      transform: rotate(18deg);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-dark);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-switcher {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.52);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    }
+
+    .theme-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .theme-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: var(--button-text);
+      box-shadow: 0 10px 18px rgba(112, 197, 141, 0.22);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 999px;
+      padding: 15px 22px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: var(--button-text);
+      box-shadow: 0 16px 28px rgba(112, 197, 141, 0.2);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.7);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .hero {
+      padding: 64px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 15px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      border: 1px solid rgba(112,197,141,0.18);
+      border-radius: 999px;
+      font-weight: 800;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 18px rgba(112, 197, 141, 0.08);
+    }
+
+    .eyebrow::before {
+      content: "❀";
+      font-size: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+      color: var(--text);
+    }
+
+    .quote {
+      margin: 18px 0 20px;
+      font-size: clamp(1.1rem, 2.3vw, 1.55rem);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .hero-copy {
+      margin: 0 0 26px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.08rem;
+      max-width: 620px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    .stat {
+      min-width: 130px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(1.6rem, 2vw, 2.2rem);
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .showcase {
+      background: var(--hero);
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .window {
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(255,255,255,0.84);
+      border-radius: 30px;
+      min-height: 430px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .window-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot.r { background: #ff7979; }
+    .dot.y { background: #f4d060; }
+    .dot.g { background: #6edb8c; }
+
+    .lesson-panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.03);
+    }
+
+    .lesson-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .topic {
+      font-weight: 900;
+      color: var(--text);
+      font-size: 1.06rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 0.72rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .progress {
+      height: 12px;
+      background: rgba(112,197,141,0.12);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 16px 0 18px;
+    }
+
+    .progress > span {
+      display: block;
+      width: 72%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: inherit;
+    }
+
+    .float-card {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 16px;
+      padding: 10px 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .float-card.top {
+      top: 18px;
+      right: -8px;
+    }
+
+    .float-card.bottom {
+      bottom: 26px;
+      left: -12px;
+    }
+
+    .leaf-icon {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--leaf), var(--accent));
+      color: white;
+      font-size: 0.9rem;
+      box-shadow: 0 14px 20px rgba(112,197,141,0.15);
+    }
+
+    .section {
+      padding: 54px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 10px;
+      color: var(--text);
+      letter-spacing: -0.06em;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .feature-grid,
+    .practice-grid,
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 12px 26px rgba(17, 24, 39, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 30px rgba(17, 24, 39, 0.06);
+    }
+
+    .icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--primary-soft), rgba(255,255,255,0.72));
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: var(--text);
+      font-size: 1.24rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 11px;
+      color: var(--muted);
+    }
+
+    .list li::before {
+      content: "✓";
+      color: var(--primary-dark);
+      font-weight: 900;
+      margin-right: 10px;
+    }
+
+    .guide-box {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 26px;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .video-plate {
+      min-height: 250px;
+      position: relative;
+      border-radius: 26px;
+      background:
+        linear-gradient(180deg, rgba(24,57,44,0.16), rgba(24,57,44,0.04)),
+        linear-gradient(135deg, #e7f9ef, #f8fbf7);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .play-button {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.88);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      color: var(--primary-dark);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .play-button::before {
+      content: "▶";
+      display: block;
+      transform: translateX(3px);
+    }
+
+    .guide-copy h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      letter-spacing: -0.05em;
+      color: var(--text);
+    }
+
+    .guide-copy p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .writing-box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .writer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .writing-prompt {
+      background: rgba(255,255,255,0.42);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .writing-prompt h3 {
+      margin: 0 0 10px;
+      font-size: 1.8rem;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    .writing-prompt p {
+      margin: 0 0 18px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .example {
+      background: linear-gradient(135deg, var(--primary-soft), rgba(255,255,255,0.7));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      resize: vertical;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.6);
+      padding: 16px 18px;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    textarea:focus {
+      border-color: rgba(112,197,141,0.55);
+      box-shadow: 0 0 0 4px rgba(112,197,141,0.08);
+    }
+
+    .cta-panel {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      border-radius: 30px;
+      padding: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: 0 22px 36px rgba(112,197,141,0.2);
+    }
+
+    .cta-panel h3 {
+      margin: 0 0 8px;
+      font-size: clamp(1.8rem, 3vw, 2.7rem);
+      letter-spacing: -0.05em;
+    }
+
+    .cta-panel p {
+      margin: 0;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .credits {
+      padding: 28px 0 44px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .credit-inner {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      background: rgba(255,255,255,0.42);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 16px 20px;
+      box-shadow: 0 8px 18px rgba(17,24,39,0.03);
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .guide-box,
+      .writer,
+      .feature-grid,
+      .practice-grid,
+      .plans-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 0;
+      }
+
+      .nav-actions {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .theme-switcher {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cta-row {
+        width: 100%;
+      }
+
+      .cta-row .btn {
+        flex: 1;
+      }
+
+      .float-card.top {
+        right: 12px;
+      }
+
+      .float-card.bottom {
+        left: 8px;
+      }
+    }
+  </style>
+</head>
+<body data-theme="nature">
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <span>English Chill Class</span>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#practice">Practice</a>
+        <a href="#youtube">YouTube</a>
+        <a href="#credits">Credits</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="theme-switcher" aria-label="Theme switcher">
+          <button class="theme-btn active" data-theme="nature">Nature</button>
+          <button class="theme-btn" data-theme="sea">Sea</button>
+          <button class="theme-btn" data-theme="windy">Windy</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="about">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">A calm place to learn English</div>
+          <h1>Welcome to our English class</h1>
+          <div class="quote">“Learn slowly, speak clearly, and grow with confidence.”</div>
+          <p class="hero-copy">
+            This website is made for a peaceful and friendly learning experience.
+            You will practice speaking, listening, and writing in a relaxing environment
+            that helps you improve naturally every day.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#practice">Start learning</a>
+            <a class="btn btn-secondary" href="#youtube">Watch a guide</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>3</strong>
+              <span>Skills</span>
+            </div>
+            <div class="stat">
+              <strong>Daily</strong>
+              <span>Practice</span>
+            </div>
+            <div class="stat">
+              <strong>Calm</strong>
+              <span>Learning vibe</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase" aria-label="Lesson preview">
+          <div class="window">
+            <div class="window-top">
+              <span class="dot r"></span>
+              <span class="dot y"></span>
+              <span class="dot g"></span>
+            </div>
+
+            <div class="lesson-panel">
+              <div class="lesson-head">
+                <div class="topic">Travel English</div>
+                <span class="chip">Today</span>
+              </div>
+              <div class="tags">
+                <span class="tag">Speaking</span>
+                <span class="tag">Listening</span>
+                <span class="tag">Writing</span>
+              </div>
+              <div class="progress"><span></span></div>
+              <div class="tags">
+                <span class="tag">Airport phrases</span>
+                <span class="tag">Daily conversation</span>
+              </div>
+            </div>
+
+            <div class="lesson-panel">
+              <div class="lesson-head">
+                <div class="topic">Practice challenge</div>
+                <span class="chip">Easy</span>
+              </div>
+              <div class="tags">
+                <span class="tag">Repeat</span>
+                <span class="tag">Listen</span>
+                <span class="tag">Write</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="float-card top">
+            <span class="leaf-icon">✦</span>
+            75% progress
+          </div>
+
+          <div class="float-card bottom">
+            <span class="leaf-icon">♫</span>
+            Listening task
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <h2>Train all your English skills</h2>
+          <p>Speaking, listening, and writing together in one peaceful learning flow.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="card">
+            <div class="icon">🗣️</div>
+            <h3>Speaking practice</h3>
+            <p>Repeat phrases out loud, speak with confidence, and improve your fluency every day.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🎧</div>
+            <h3>Listening practice</h3>
+            <p>Listen to short real-life conversations and focus on pronunciation, rhythm, and meaning.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">✍️</div>
+            <h3>Writing practice</h3>
+            <p>Write simple sentences, complete prompts, and improve grammar in a calm and useful way.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="practice">
+      <div class="container">
+        <div class="section-head">
+          <h2>How the learning works</h2>
+          <p>Simple steps that keep your progress smooth and comfortable.</p>
+        </div>
+
+        <div class="practice-grid">
+          <article class="card">
+            <div class="icon">1️⃣</div>
+            <h3>Start with a topic</h3>
+            <p>Choose a lesson such as travel, school, daily life, or feelings.</p>
+            <ul class="list">
+              <li>Read the sentence clearly</li>
+              <li>Repeat it slowly</li>
+              <li>Use it in your own words</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="icon">2️⃣</div>
+            <h3>Listen and understand</h3>
+            <p>Practice listening with short clips or natural video examples.</p>
+            <ul class="list">
+              <li>Focus on key words</li>
+              <li>Listen twice if needed</li>
+              <li>Learn pronunciation naturally</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="icon">3️⃣</div>
+            <h3>Write and reflect</h3>
+            <p>Create your own sentences and apply what you learned in a relaxed way.</p>
+            <ul class="list">
+              <li>Write 3–5 sentences</li>
+              <li>Check grammar carefully</li>
+              <li>Improve each day</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="youtube">
+      <div class="container">
+        <div class="section-head">
+          <h2>YouTube study guides</h2>
+          <p>Search YouTube for a lesson video that fits your topic, and try using an Arabic channel that helps you study English clearly.</p>
+        </div>
+
+        <div class="guide-box">
+          <div class="video-plate" aria-label="YouTube guide placeholder">
+            <div class="play-button"></div>
+          </div>
+
+          <div class="guide-copy">
+            <h3>Use videos to support your study</h3>
+            <p>
+              Watching English videos is a great way to improve listening skills and vocabulary.
+              Search YouTube for a video that matches your lesson, and choose an Arabic channel
+              that explains English in simple and helpful ways.
+            </p>
+
+            <ul class="list">
+              <li>Pick a topic related to your lesson</li>
+              <li>Watch with subtitles if needed</li>
+              <li>Repeat useful phrases aloud</li>
+              <li>Write down new words and sentences</li>
+            </ul>
+
+            <a class="btn btn-primary" href="#practice">Try a lesson</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Daily writing challenge</h2>
+          <p>Practice writing with a gentle prompt that helps you grow step by step.</p>
+        </div>
+
+        <div class="writing-box">
+          <div class="writer">
+            <div class="writing-prompt">
+              <h3>Write about your day</h3>
+              <p>
+                Write 4–5 sentences about a normal day in your life. Use simple English and
+                talk about what you do in the morning, afternoon, and evening.
+              </p>
+              <div class="example">
+                Example:<br />
+                “I wake up early in the morning. I study English and drink tea. Then I go to school. In the evening, I rest and practice speaking.”
+              </div>
+            </div>
+
+            <textarea aria-label="Writing area" placeholder="Write your answer here..."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <h3>Let’s learn with calm energy</h3>
+            <p>Speak clearly, listen carefully, and write gently every day.</p>
+          </div>
+          <a class="btn btn-secondary" href="#about" style="background: white; color: var(--primary-dark);">Start now</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="container credits" id="credits">
+    <div class="credit-inner">
+      <span>Creator: Abd Alrhman Khmysy</span>
+      <span>Teacher: Haitham Najjar</span>
+      <span>School: Al-Razi High School</span>
+    </div>
+  </div>
+
+  <script>
+    const themeButtons = document.querySelectorAll('.theme-btn');
+    const body = document.body;
+
+    themeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const selectedTheme = button.dataset.theme;
+        body.setAttribute('data-theme', selectedTheme);
+
+        themeButtons.forEach((btn) => {
+          btn.classList.toggle('active', btn === button);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
